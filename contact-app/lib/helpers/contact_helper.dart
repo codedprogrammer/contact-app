@@ -7,6 +7,7 @@ final String nameColumn = "nameColumn";
 final String emailColumn = "emailColumn";
 final String phoneColumn = "phoneColumn";
 final String workColumn = "workColumn";
+final String genderColumn = "genderColumn";
 final String addressColumn = "addressColumn";
 final String imageColumn = "imageColumn";
 
@@ -36,7 +37,7 @@ class ContactHelper {
         onCreate: (Database db, int newerVersion) async {
       await db.execute(
           "CREATE TABLE $contactTable($idColumn INTEGER PRIMARY KEY, $nameColumn VARCHAR(100), $emailColumn VARCHAR(255),"
-          "$phoneColumn VARCHAR(20), $workColumn VARCHAR(50), $addressColumn VARCHAR(100), $imageColumn TEXT)");
+          "$phoneColumn VARCHAR(20), $workColumn VARCHAR(50), $genderColumn VARCHAR(10), $addressColumn VARCHAR(100), $imageColumn TEXT)");
     });
   }
 
@@ -55,6 +56,7 @@ class ContactHelper {
           emailColumn,
           phoneColumn,
           workColumn,
+          genderColumn,
           addressColumn,
           imageColumn
         ],
@@ -107,6 +109,7 @@ class Contact {
   String email;
   String phone;
   String work;
+  String gender;
   String address;
   String image;
 
@@ -118,6 +121,7 @@ class Contact {
     email = map[emailColumn];
     phone = map[phoneColumn];
     work = map[workColumn];
+    gender = map[genderColumn];
     address = map[addressColumn];
     image = map[imageColumn];
   }
@@ -128,6 +132,7 @@ class Contact {
       emailColumn: email,
       phoneColumn: phone,
       workColumn: work,
+      genderColumn: gender,
       addressColumn: address,
       imageColumn: image,
     };
@@ -139,6 +144,6 @@ class Contact {
 
   @override
   String toString() {
-    return "Contact(id:$id, name:$name, email:$email, phone: $phone, work: $work, address: $address, image: $image";
+    return "Contact(id:$id, name:$name, email:$email, phone: $phone, work: $work, gender: $gender, address: $address, image: $image";
   }
 }

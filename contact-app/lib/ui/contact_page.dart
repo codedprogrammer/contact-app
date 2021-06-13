@@ -18,6 +18,7 @@ class _ContactPageState extends State<ContactPage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _workController = TextEditingController();
+  final _genderController = TextEditingController();
   final _addressController = TextEditingController();
 
   final _nameFocus = FocusNode();
@@ -38,6 +39,7 @@ class _ContactPageState extends State<ContactPage> {
       _emailController.text = _editedContact.email;
       _phoneController.text = _editedContact.phone;
       _workController.text = _editedContact.work;
+      _genderController.text = _editedContact.gender;
       _addressController.text = _editedContact.address;
     }
   }
@@ -48,7 +50,8 @@ class _ContactPageState extends State<ContactPage> {
       onWillPop: _requestPop,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.deepOrange,
+          leading: Icon(Icons.arrow_back_ios),
+          backgroundColor: Color(0xff202124),
           title: Text(_editedContact.name ?? "New Contact"),
           centerTitle: true,
         ),
@@ -61,7 +64,7 @@ class _ContactPageState extends State<ContactPage> {
             }
           },
           child: Icon(Icons.save),
-          backgroundColor: Colors.deepOrange,
+          backgroundColor: Color(0xff202124),
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(10),
@@ -72,11 +75,15 @@ class _ContactPageState extends State<ContactPage> {
                   radius: 70.0,
                   child: Container(
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: _editedContact.image != null
-                                ? FileImage(File(_editedContact.image))
-                                : AssetImage("images/person.jpg"))),
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: _editedContact.image != null
+                            ? FileImage(
+                                File(_editedContact.image),
+                              )
+                            : AssetImage("images/person.jpg"),
+                      ),
+                    ),
                   ),
                 ),
                 onTap: () {
@@ -96,7 +103,7 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Color(0xff202124)),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.pink),
@@ -121,7 +128,7 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Color(0xff202124)),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.pink),
@@ -144,7 +151,7 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Color(0xff202124)),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.pink),
@@ -167,7 +174,7 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Color(0xff202124)),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.pink),
@@ -189,7 +196,29 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Color(0xff202124)),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.pink),
+                  ),
+                  hintText: 'Gender',
+                  hintStyle: TextStyle(
+                    color: Colors.blueGrey,
+                  ),
+                ),
+                onChanged: (text) {
+                  _userEdited = true;
+                  _editedContact.gender = text;
+                },
+                controller: _genderController,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xff202124)),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.pink),

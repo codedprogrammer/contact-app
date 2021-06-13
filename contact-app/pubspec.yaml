@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  flappy_search_bar: 1.7.2
   flutter:
     sdk: flutter
 
@@ -50,6 +51,7 @@ flutter:
 
   assets:
     - images/person.jpg
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

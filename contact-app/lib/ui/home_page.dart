@@ -4,8 +4,7 @@ import 'package:contact_app/ui/contact_page.dart';
 import 'package:flutter/material.dart';
 import 'package:contact_app/helpers/contact_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-enum OrderOptions { orderaz, orderza }
+import 'package:contact_app/mapPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,7 +15,6 @@ class _HomePageState extends State<HomePage> {
   ContactHelper helper = ContactHelper();
 
   List<Contact> contacts = [];
-
   @override
   void initState() {
     super.initState();
@@ -28,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Contacts"),
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Color(0xff202124),
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
@@ -37,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           _showContactPage();
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Color(0xff202124),
       ),
       body: ListView.builder(
           padding: EdgeInsets.all(5),
@@ -51,18 +49,26 @@ class _HomePageState extends State<HomePage> {
   Widget _contactCard(BuildContext context, int index) {
     return GestureDetector(
       child: Card(
+        color: Color(0xff313235),
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               CircleAvatar(
                 child: Container(
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: contacts[index].image != null
-                              ? FileImage(File(contacts[index].image))
-                              : AssetImage("images/person.jpg"))),
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: contacts[index].image != null
+                          ? FileImage(
+                              File(
+                                contacts[index].image,
+                              ),
+                            )
+                          : AssetImage("images/person.jpg"),
+                    ),
+                  ),
                 ),
               ),
               Padding(
@@ -73,20 +79,37 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       contacts[index].name ?? "",
                       style: TextStyle(
+                        color: Colors.white,
                         fontSize: 18,
                       ),
                     ),
-                    // Text(
-                    //   contacts[index].email ?? "",
-                    //   style: TextStyle(fontSize: 18),
-                    // ),
-                    // Text(
-                    //   contacts[index].phone ?? "",
-                    //   style: TextStyle(fontSize: 18),
-                    // ),
+                    Text(
+                      contacts[index].phone ?? "",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MapPage(),
+                    ),
+                  );
+                },
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.deepOrange,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
